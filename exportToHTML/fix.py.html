@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>fix.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+fix.py</font>
+</center></td></tr></table>
+<pre><span class="s0"># if message.text == 'Гороскоп':</span>
+<span class="s0">#     bot.send_message(message.from_user.id, &quot;сейчас я расскажу тебе гороскоп на сегодня.&quot;)</span>
+<span class="s0">#     keyboard = types.InlineKeyboardMarkup()</span>
+<span class="s0">#     key_oven = types.InlineKeyboardButton(text='Овен', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_oven)</span>
+<span class="s0">#     key_telec = types.InlineKeyboardButton(text='Телец', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_telec)</span>
+<span class="s0">#     key_bliznecy = types.InlineKeyboardButton(text='Близнецы', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_bliznecy)</span>
+<span class="s0">#     key_rak = types.InlineKeyboardButton(text='Рак', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_rak)</span>
+<span class="s0">#     key_lev = types.InlineKeyboardButton(text='Лев', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_lev)</span>
+<span class="s0">#     key_deva = types.InlineKeyboardButton(text='Дева', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_deva)</span>
+<span class="s0">#     key_vesy = types.InlineKeyboardButton(text='Весы', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_vesy)</span>
+<span class="s0">#     key_scorpion = types.InlineKeyboardButton(text='Скорпион', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_scorpion)</span>
+<span class="s0">#     key_strelec = types.InlineKeyboardButton(text='Стрелец', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_strelec)</span>
+<span class="s0">#     key_kozerog = types.InlineKeyboardButton(text='Козерог', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_kozerog)</span>
+<span class="s0">#     key_vodoley = types.InlineKeyboardButton(text='Водолей', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_vodoley)</span>
+<span class="s0">#     key_ryby = types.InlineKeyboardButton(text='Рыбы', callback_data='zodiac')</span>
+<span class="s0">#     keyboard.add(key_ryby)</span>
+<span class="s0">#     bot.send_message(message.from_user.id, text='Выбери свой знак зодиака', reply_markup=keyboard)</span>
+<span class="s0">#</span>
+<span class="s0">#</span>
+<span class="s0">#     @bot.callback_query_handler(func=lambda call: True)</span>
+<span class="s0">#     def callback_worker(call):</span>
+<span class="s0">#         if call.data == &quot;zodiac&quot;:</span>
+<span class="s0">#             msg = random.choice(first) + ' ' + random.choice(second) + ' ' + random.choice(</span>
+<span class="s0">#                 second_2) + ' ' + random.choice(third)</span>
+<span class="s0">#             bot.send_message(message.chat.id, msg, )</span>
+<span class="s0">#</span>
+<span class="s0"># elif message.text == &quot;Создай свой ник&quot;:</span>
+<span class="s0">#     bot.send_message(message.chat.id, text=get_nickname())</span>
+<span class="s0"># elif message.text == &quot;Анекдоты&quot;:</span>
+<span class="s0">#     bot.send_message(message.chat.id, text=get_anekdot())</span>
+<span class="s0"># elif message.text == &quot;Показать лисичку&quot;:</span>
+<span class="s0">#     contents = requests.get('https://randomfox.ca/floof').json()</span>
+<span class="s0">#     urlCAT = contents['image']</span>
+<span class="s0">#     bot.send_photo(message.chat.id, photo=urlCAT)</span></pre>
+</body>
+</html>

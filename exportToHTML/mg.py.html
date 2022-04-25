@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>mg.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+mg.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">random </span><span class="s0">import </span><span class="s1">choice</span>
+
+
+<span class="s0">def </span><span class="s1">get_map_cell(cols</span><span class="s0">, </span><span class="s1">rows):</span>
+    <span class="s0">class </span><span class="s1">Cell:</span>
+        <span class="s0">def </span><span class="s1">__init__(self</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y):</span>
+            <span class="s1">self.x = x</span>
+            <span class="s1">self.y = y</span>
+            <span class="s1">self.walls = {</span><span class="s2">'top'</span><span class="s1">: </span><span class="s0">True, </span><span class="s2">'right'</span><span class="s1">: </span><span class="s0">True, </span><span class="s2">'bottom'</span><span class="s1">: </span><span class="s0">True, </span><span class="s2">'left'</span><span class="s1">: </span><span class="s0">True</span><span class="s1">}</span>
+            <span class="s1">self.visited = </span><span class="s0">False</span>
+
+        <span class="s0">def </span><span class="s1">check_cell(self</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y):</span>
+            <span class="s0">if </span><span class="s1">x &lt; </span><span class="s3">0 </span><span class="s0">or </span><span class="s1">x &gt; cols - </span><span class="s3">1 </span><span class="s0">or </span><span class="s1">y &lt; </span><span class="s3">0 </span><span class="s0">or </span><span class="s1">y &gt; rows - </span><span class="s3">1</span><span class="s1">:</span>
+                <span class="s0">return False</span>
+            <span class="s0">return </span><span class="s1">grid_cell[x + y * cols]</span>
+
+        <span class="s0">def </span><span class="s1">check_neighbours(self):</span>
+            <span class="s1">neighbours = []</span>
+
+            <span class="s1">top = self.check_cell(self.x</span><span class="s0">, </span><span class="s1">self.y - </span><span class="s3">1</span><span class="s1">)</span>
+            <span class="s1">right = self.check_cell(self.x + </span><span class="s3">1</span><span class="s0">, </span><span class="s1">self.y)</span>
+            <span class="s1">bottom = self.check_cell(self.x</span><span class="s0">, </span><span class="s1">self.y + </span><span class="s3">1</span><span class="s1">)</span>
+            <span class="s1">left = self.check_cell(self.x - </span><span class="s3">1</span><span class="s0">, </span><span class="s1">self.y)</span>
+
+            <span class="s0">if </span><span class="s1">top </span><span class="s0">and not </span><span class="s1">top.visited:</span>
+                <span class="s1">neighbours.append(top)</span>
+            <span class="s0">if </span><span class="s1">right </span><span class="s0">and not </span><span class="s1">right.visited:</span>
+                <span class="s1">neighbours.append(right)</span>
+            <span class="s0">if </span><span class="s1">bottom </span><span class="s0">and not </span><span class="s1">bottom.visited:</span>
+                <span class="s1">neighbours.append(bottom)</span>
+            <span class="s0">if </span><span class="s1">left </span><span class="s0">and not </span><span class="s1">left.visited:</span>
+                <span class="s1">neighbours.append(left)</span>
+
+            <span class="s0">return </span><span class="s1">choice(neighbours) </span><span class="s0">if </span><span class="s1">neighbours </span><span class="s0">else False</span>
+
+    <span class="s0">def </span><span class="s1">remove_walls(current_cell</span><span class="s0">, </span><span class="s1">next_cell):</span>
+        <span class="s1">dx = current_cell.x - next_cell.x</span>
+        <span class="s1">dy = current_cell.y - next_cell.y</span>
+
+        <span class="s0">if </span><span class="s1">dx == </span><span class="s3">1</span><span class="s1">:</span>
+            <span class="s1">current_cell.walls[</span><span class="s2">'left'</span><span class="s1">] = </span><span class="s0">False</span>
+            <span class="s1">next_cell.walls[</span><span class="s2">'right'</span><span class="s1">] = </span><span class="s0">False</span>
+        <span class="s0">if </span><span class="s1">dx == -</span><span class="s3">1</span><span class="s1">:</span>
+            <span class="s1">current_cell.walls[</span><span class="s2">'right'</span><span class="s1">] = </span><span class="s0">False</span>
+            <span class="s1">next_cell.walls[</span><span class="s2">'left'</span><span class="s1">] = </span><span class="s0">False</span>
+        <span class="s0">if </span><span class="s1">dy == </span><span class="s3">1</span><span class="s1">:</span>
+            <span class="s1">current_cell.walls[</span><span class="s2">'top'</span><span class="s1">] = </span><span class="s0">False</span>
+            <span class="s1">next_cell.walls[</span><span class="s2">'bottom'</span><span class="s1">] = </span><span class="s0">False</span>
+        <span class="s0">if </span><span class="s1">dy == -</span><span class="s3">1</span><span class="s1">:</span>
+            <span class="s1">current_cell.walls[</span><span class="s2">'bottom'</span><span class="s1">] = </span><span class="s0">False</span>
+            <span class="s1">next_cell.walls[</span><span class="s2">'top'</span><span class="s1">] = </span><span class="s0">False</span>
+
+    <span class="s0">def </span><span class="s1">check_wall(grid_cell</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y):</span>
+        <span class="s0">if </span><span class="s1">x % </span><span class="s3">2 </span><span class="s1">== </span><span class="s3">0 </span><span class="s0">and </span><span class="s1">y % </span><span class="s3">2 </span><span class="s1">== </span><span class="s3">0</span><span class="s1">:</span>
+            <span class="s0">return False</span>
+        <span class="s0">if </span><span class="s1">x % </span><span class="s3">2 </span><span class="s1">== </span><span class="s3">1 </span><span class="s0">and </span><span class="s1">y % </span><span class="s3">2 </span><span class="s1">== </span><span class="s3">1</span><span class="s1">:</span>
+            <span class="s0">return True</span>
+
+        <span class="s0">if </span><span class="s1">x % </span><span class="s3">2 </span><span class="s1">== </span><span class="s3">0</span><span class="s1">:</span>
+            <span class="s1">grid_x = x // </span><span class="s3">2</span>
+            <span class="s1">grid_y = (y - </span><span class="s3">1</span><span class="s1">) // </span><span class="s3">2</span>
+            <span class="s0">return </span><span class="s1">grid_cell[grid_x + grid_y * cols].walls[</span><span class="s2">'bottom'</span><span class="s1">]</span>
+        <span class="s0">else</span><span class="s1">:</span>
+            <span class="s1">grid_x = (x - </span><span class="s3">1</span><span class="s1">) // </span><span class="s3">2</span>
+            <span class="s1">grid_y = y // </span><span class="s3">2</span>
+            <span class="s0">return </span><span class="s1">grid_cell[grid_x + grid_y * cols].walls[</span><span class="s2">'right'</span><span class="s1">]</span>
+
+    <span class="s1">grid_cell = [Cell(x</span><span class="s0">, </span><span class="s1">y) </span><span class="s0">for </span><span class="s1">y </span><span class="s0">in </span><span class="s1">range(rows) </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">range(cols)]</span>
+    <span class="s1">current_cell = grid_cell[</span><span class="s3">0</span><span class="s1">]</span>
+    <span class="s1">current_cell.visited = </span><span class="s0">True</span>
+    <span class="s1">stack = []</span>
+
+    <span class="s0">while True</span><span class="s1">:</span>
+        <span class="s1">next_cell = current_cell.check_neighbours()</span>
+        <span class="s0">if </span><span class="s1">next_cell:</span>
+            <span class="s1">next_cell.visited = </span><span class="s0">True</span>
+            <span class="s1">remove_walls(current_cell</span><span class="s0">, </span><span class="s1">next_cell)</span>
+            <span class="s1">current_cell = next_cell</span>
+            <span class="s1">stack.append(current_cell)</span>
+        <span class="s0">elif </span><span class="s1">stack:</span>
+            <span class="s1">current_cell = stack.pop()</span>
+        <span class="s0">else</span><span class="s1">:</span>
+            <span class="s0">break</span>
+
+    <span class="s0">return </span><span class="s1">[check_wall(grid_cell</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y) </span><span class="s0">for </span><span class="s1">y </span><span class="s0">in </span><span class="s1">range(rows * </span><span class="s3">2 </span><span class="s1">- </span><span class="s3">1</span><span class="s1">) </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">range(cols * </span><span class="s3">2 </span><span class="s1">- </span><span class="s3">1</span><span class="s1">)]</span>
+</pre>
+</body>
+</html>
